@@ -1,63 +1,114 @@
-## Avalanche_Subnet
+## Description: Defi Empire, A Simple DeFI Kingdom Clone
 
-# DeFi Empire: A Simple DeFi Kingdom Clone
-This project is part of the Avax Advanced Module by Metacrafters, where you’ll create a basic DeFi Kingdom-style game on the Avalanche network.
+This is Metacrafters Avax Advanced Module first's project. 
 
-# Steps to Build Your DeFi Kingdom Clone
-1. Set Up Your EVM Subnet:
+Set up your EVM subnet: You can use our guide and the Avalanche documentation to create a custom EVM subnet on the Avalanche network.
 
-* Use the Avalanche CLI (only available on macOS and Linux) to create a custom EVM subnet on the Avalanche network.
+Define your native currency: You can set up your own native currency, which can be used as the in-game currency for your DeFi Kingdom clone.
 
-* Windows users can install WSL (Windows Subsystem for Linux) to get Ubuntu and then follow the instructions.
-2. Define Your Native Currency:
-* Set up your in-game currency for the DeFi Kingdom clone.
-3. Connect to MetaMask:
+Connect to Metamask: Connect you EVM Subnet to metamask, this can be done by following the steps laid out in our guide.
 
-* Link your EVM Subnet to MetaMask by following the instructions provided.
-4. Deploy Basic Game Components:
+Deploy basic building blocks: You can use Solidity and Remix to deploy the basic building blocks of your game, such as smart contracts for battling, exploring, and trading. These contracts will define the game rules, such as liquidity pools, tokens, and more.
 
-* Use Solidity and Remix to create and deploy the basic elements of your game, such as smart contracts for battling, exploring, and trading.
-Color Guessing Game with Token Rewards
-* This project also includes a simple number guessing game on the Avalanche EVM subnet. Here’s how it works:
+# Number Guessing Game with Token Rewards
 
-Game Setup: Players guess a number between 1 and 10. If they guess correctly, they earn 5 tokens. If they run out of attempts without guessing the correct number, they lose tokens as a penalty.
+This project implements a simple number guessing game on the Avalanche subnet EVM using Solidity. Players can guess a number between 1 and 10, and if correct, they receive 5 tokens as a reward. If they exhaust their attempts without guessing correctly, they incur a token penalty.
 
-# Creating Your Own EVM Subnet on Avalanche
+# Steps to create your own subnet EVM on avalanche
+1. Install Avalanche CLI(currently on mac and linux only )on your OS. If you are windows user, then use WSL to install ubuntu on your local machine.  You can find installation instructions for the Avalanche CLI in the official documentation.
 
-1. Install Avalanche CLI: Follow the official documentation to install the Avalanche CLI on your machine.
-* Windows Users: Use WSL to install Ubuntu.
-2.Create a Subnet:
-* Run avalanche subnet create mySubnet in your terminal to create a new subnet.
-* Choose the SubnetEVM option for an EVM Subnet.
-* Define your chain ID and token symbol.
-3. Deploy the Subnet:
-* Deploy your subnet using the command avalanche subnet deploy mySubnet.
-* The console will display all the details about your new subnet.
-4. Connect to MetaMask:
-* Use the connection details from the Avalanche CLI to add your subnet to MetaMask.
+2. After installing Avalanche CLI,  you can create a new subnet by running the command avalanche subnet create mySubnet in your terminal. This will create a new subnet with the name "mySubnet" on your local machine.
 
-# Contracts Overview
-* GameToken.sol: Defines an ERC-20-like token called "The NumWarrior" (TNWR). It includes minting and transferring functions.
-* NumberGuessingGame.sol: Implements the logic for the number guessing game and interacts with GameToken.sol.
+3. When creating a new subnet, you will be prompted to select a subnet type. Choose the SubnetEVM option to create an EVM Subnet on your local machine and follow the steps in the image below:
 
-# How to Use
+4. avalanche subnet create mySubnet
 
-1. Deploy Contracts:
-* Deploy GameToken.sol first to get the token address.
-* Deploy NumberGuessingGame.sol using the token address.
-2. Play the Game:
+Attempted to check if a new version is available, but couldn't find the currently running version information
 
-* Players guess the secret number using the guessNumber function.
-* The admin can generate a new secret number or reset attempts.
+Make sure to follow official instructions, or automatic updates won't be available for you
 
-# Requirements
-*  Solidity ^0.8.17
-* Truffle or Remix for deployment and testing
-* MetaMask or similar wallet for interaction
+✔ Subnet-EVM
 
-# Author
-Khushi Ranjana
+creating subnet mySubnet
 
-# License
-This project is licensed under the MIT License.
+Enter your subnet's ChainId. It can be any positive integer.
+ChainId: eg 27031
+
+Select a symbol for your subnet's native token
+
+Token symbol: TEST
+
+✔ Use latest version
+
+✔ Low disk use    / Low Throughput    1.5 mil gas/s (C-Chain's setting)
+
+✔ Airdrop 1 million tokens to the default address (do not use in production)
+
+✔ No
+
+5. After selecting the EVM Subnet option, you can deploy the subnet by running the command avalanche subnet deploy mySubnet and selecting to deploy your subnet on your local network. This will deploy your new EVM Subnet on your local machine.
+
+6. Once your EVM Subnet is deployed, the console will display all the details about the subnet you just created. You can use this information to interact with the subnet and start building your smart-contract protocol.
+
+## Connecting to Metamask:
+After deploying your subnet, you will be able to see the browser extension connection details at the bottom of the console. These details can be used to connect your subnet to a wallet such as Metamask. It also includes a private key to access funds and interact with your blockchain.
+
+By following these steps, you will be able to connect your subnet to Metamask and start interacting with your blockchain.
+
+Open Metamask on your web browser.
+
+Go to Networks > Add a network > Add a network manually.
+
+Enter the details provided by the Avalanche CLI.
+
+Click on "Save" to add the subnet to Metamask.
+
+## Contracts
+
+### GameToken.sol
+
+This contract defines an ERC-20-like token named "The NumWarrior" (`TNWR`). It includes basic functionalities such as minting tokens and transferring tokens between addresses.
+
+### NumberGuessingGame.sol
+
+This contract interacts with `GameToken.sol` and implements the number guessing game logic:
+
+- **Admin Functions:**
+  - `generateSecretNumber`: Generates a secret number between 1 and 10 which players need to guess.
+  - `resetAttempts`: Allows the admin to reset the number of attempts for a specific player.
+
+- **Player Functions:**
+  - `guessNumber`: Allows players to guess the secret number. Rewards tokens on correct guesses and penalizes for incorrect attempts.
+
+### Usage
+
+1. **Deploy Contracts:**
+   - Deploy `GameToken.sol` first to get the token address.
+   - Deploy `NumberGuessingGame.sol` with the token address as a parameter.
+
+2. **Interact with the Game:**
+   - Players can guess the secret number using the `guessNumber` function.
+   - Admin can generate a new secret number or reset attempts using respective functions.
+
+### Events
+
+- `Guess`: Emitted on each guess attempt, indicating success and remaining attempts.
+- `Reward`: Emitted when a player guesses correctly and receives tokens.
+- `Penalty`: Emitted when a player exhausts all attempts without guessing correctly and incurs a token deduction.
+
+### Requirements
+
+- Solidity ^0.8.17
+- Truffle or Remix for contract deployment and testing
+- MetaMask or similar wallet for interacting with the game on Ethereum testnets or mainnet
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+
+### Developer
+
+- **Name:** Khushi Ranjana
+- **GitHub:** https://github.com/Khubth
+  
 
